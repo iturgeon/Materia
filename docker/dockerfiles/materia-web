@@ -1,5 +1,37 @@
-FROM php:7.1.22-fpm-alpine
-MAINTAINER Ian Turgeon
+# Define versions used to select image versions
+# (ARGs declared before FROM can't be used outside of FROMs)
+ARG FROM_V8=6.9
+ARG FROM_ALPINE=
+ARG FROM_PHP=7.1.22
+
+# Compress libv8 and save for later
+FROM alexmasterov/alpine-libv8:$FROM_V8 as v8build
+RUN tar cvzf /tmp/libv8.tar.gz -C ${V8_DIR} .
+
+# Build PHP Image
+FROM php:${FROM_PHP}-fpm-alpine${FROM_ALPINE}
+
+COPY --from=v8build /tmp/libv8.tar.gz /tmp/libv8.tar.gz
+
+# Install build dependencies
+RUN apk add -u --no-cache --virtual .build-deps \
+		$PHPIZE_DEPS \
+		zlib-dev \
+		g++ \
+		make \
+
+	# V8JS
+	&& export V8_DIR=/usr/local/v8 \
+	&& mkdir -p $V8_DIR \
+	&& tar xzvf /tmp/libv8.tar.gz -C $V8_DIR \
+	&& echo $V8_dir | pecl install v8js \
+	&& docker-php-ext-enable v8js \
+	&& rm -rf /tmp/libv8.tar.gz \
+
+	# Cleanup
+	&& apk del .build-deps
+
+# FROM php:7.1.22-fpm-alpine
 
 RUN apk add --no-cache \
 	autoconf \

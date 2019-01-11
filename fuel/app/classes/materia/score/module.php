@@ -33,16 +33,6 @@ abstract class Score_Module
 	}
 
 	/**
-	 * Perform all validation
-	 *
-	 * @return boolean whether or not everything validates
-	 */
-	public function validate()
-	{
-		return $this->validate_times() && $this->validate_scores();
-	}
-
-	/**
 	 * Validate that the logs we recieved make sense in time,
 	 *  both in our server time and in the player time.
 	 * Adds a validation fail log for every log that is found to be out of order (time-wise)
@@ -312,7 +302,7 @@ abstract class Score_Module
 	 *
 	 * @return number the score received for this question (range: [0-100])
 	 */
-	abstract public function check_answer($log);
+	abstract protected function check_answer($log);
 
 
 	protected function get_ss_expected_answers($log, $question)
@@ -352,12 +342,12 @@ abstract class Score_Module
 	 *
 	 * @param Session_Log Contains information about this play session
 	 */
-	public function get_ss_answer($log, $question)
+	protected function get_ss_answer($log, $question)
 	{
 		return $log->text;
 	}
 
-	public function get_ss_question($log, $question)
+	protected function get_ss_question($log, $question)
 	{
 		return $question->questions[0]['text'];
 	}

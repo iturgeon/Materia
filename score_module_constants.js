@@ -1,0 +1,30 @@
+// System Events
+const TYPE_ASSET_LOADED            = 'WIDGET_LOAD_DONE';
+const TYPE_ASSET_LOADING           = 'WIDGET_LOAD_START';
+const TYPE_FRAMEWORK_INIT          = 'WIDGET_CORE_INIT';
+const TYPE_LOG_IN                  = 'WIDGET_LOGIN';
+const TYPE_PLAY_CREATED            = 'WIDGET_PLAY_START';
+const TYPE_PLAY_REQUEST            = 'WIDGET_PLAY_REQ';
+const TYPE_WIDGET_END              = 'WIDGET_END';
+const TYPE_WIDGET_RESTART          = 'WIDGET_RESTART';
+const TYPE_WIDGET_START            = 'WIDGET_START';
+const TYPE_WIDGET_STATE_CHANGE     = 'WIDGET_STATE';
+
+// In-Widget User Events
+const TYPE_BUTTON_PRESS            = 'BUTTON_PRESS';
+const TYPE_KEY_PRESS               = 'KEY_PRESS';
+
+// Scoring and Reporting
+const TYPE_WIDGET_INTERACTION      = 'SCORE_WIDGET_INTERACTION';
+const TYPE_FINAL_SCORE_FROM_CLIENT = 'SCORE_FINAL_FROM_CLIENT';
+const TYPE_QUESTION_ANSWERED       = 'SCORE_QUESTION_ANSWERED';
+const TYPE_SCORE_ALERT             = 'SCORE_ALERT';
+const TYPE_SCORE_FEEDBACK          = 'SCORE_FEEDBACK';
+const TYPE_SCORE_SET_QUESTION      = 'SCORE_SET_QUESTION';
+
+// Errors
+const TYPE_GENERAL_ERROR           = 'ERROR_GENERAL';
+const TYPE_TIME_VALIDATION_FAILURE = 'ERROR_TIME_VALIDATION';
+
+// Catch all
+const TYPE_DATA                    = 'DATA';
